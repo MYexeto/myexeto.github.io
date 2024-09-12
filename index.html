@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шахматная доска в реальном размере</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #chessboard {
+            display: grid;
+            margin-top: 20px;
+        }
+
+        .square {
+            width: 100%;
+            height: 100%;
+        }
+
+        .center-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .form-inline {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-inline">
+        <button id="toggleButton" class="btn btn-primary" onclick="toggleControls()">Скрыть/Показать настройки</button>
+
+        <div id="controls" class="d-flex align-items-center">
+            <div class="me-2">
+                <label for="diagonal" class="form-label">Диагональ экрана (дюймы):</label>
+                <input type="number" id="diagonal" step="0.1" value="14" class="form-control" oninput="drawChessboard()">
+            </div>
+            <div class="me-2">
+                <label for="columns" class="form-label">Квадраты по горизонтали:</label>
+                <input type="number" id="columns" value="8" class="form-control" oninput="drawChessboard()">
+            </div>
+            <div class="me-2">
+                <label for="rows" class="form-label">Квадраты по вертикали:</label>
+                <input type="number" id="rows" value="8" class="form-control" oninput="drawChessboard()">
+            </div>
+            <div>
+                <label for="squareSize" class="form-label">Размер квадрата (мм):</label>
+                <input type="number" id="squareSize" value="10" class="form-control" oninput="drawChessboard()">
+            </div>
+        </div>
+    </div>
+
+    <div class="center-content" style="padding-top: 70px;">
+        <div id="chessboard"></div>
+    </div>
+
+    <!-- Подключение Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function drawChessboard() {
+            const diagonal = parseFloat(document.getElementById('diagonal').value);
+            const columns = parseInt(document.getElementById('columns').value);
+            const rows = parseInt(document.getElementById('rows').value);
+            const squareSize = parseFloat(document.getElementById('squareSize').value);
+
+            // Определение PPI (пикселей на дюйм)
+            const resolutionWidth = window.screen.width;
+            const resolutionHeight = window.screen.height;
+            const PPI = Math.sqrt(resolutionWidth**2 + resolutionHeight**2) / diagonal;
+
+            // Перевод размера квадрата в пиксели
+            const squareSizeInPixels = (squareSize / 25.4) * PPI; // 25.4 мм в одном дюйме
+
+            // Отрисовка шахматной доски
+            const chessboard = document.getElementById('chessboard');
+            chessboard.style.gridTemplateColumns = `repeat(${columns}, ${squareSizeInPixels}px)`;
+            chessboard.style.gridTemplateRows = `repeat(${rows}, ${squareSizeInPixels}px)`;
+            chessboard.innerHTML = ''; // Очистить предыдущую доску
+
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < columns; col++) {
+                    const square = document.createElement('div');
+                    square.className = 'square';
+                    square.style.backgroundColor = (row + col) % 2 === 0 ? 'white' : 'black';
+                    chessboard.appendChild(square);
+                }
+            }
+        }
+
+        function toggleControls() {
+            const controls = document.getElementById('controls');
+            controls.style.display = controls.style.display === 'none' ? 'flex' : 'none';
+        }
+
+        // Инициализация доски при загрузке страницы
+        drawChessboard();
+    </script>
+</body>
+</html>
