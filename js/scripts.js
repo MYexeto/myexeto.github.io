@@ -30,7 +30,11 @@ function drawChessboard() {
 
 function toggleControls() {
     const controls = document.getElementById('controls');
-    controls.style.display = controls.style.display === 'none' ? 'flex' : 'none';
+    if (controls.style.display === 'none' || controls.style.display === '') {
+        controls.style.display = 'flex';
+    } else {
+        controls.style.display = 'none';
+    }
 }
 
 // Инициализация доски при загрузке страницы
