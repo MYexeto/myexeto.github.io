@@ -16,45 +16,36 @@
 <body>
 
 <div class="form-inline d-flex justify-content-center">
-  <button id="toggleButton" class="btn btn-primary ">Settings
-    Show/Hide</button>
+  <button id="toggleButton" class="btn btn-primary ">Settings Show/Hide</button>
 
-  <div id="controls" class="d-flex align-items-center justify-content-center">
+  <div id="controls" class="d-none align-items-center justify-content-center">
     <div class="me-2">
-      <label for="diagonal" class="form-label">Diagonal
-        (inch):</label>
-      <input type="number" id="diagonal" step="0.1" value="14"
-             class="form-control" oninput="drawChessboard()">
+      <label for="diagonal" class="form-label">Diagonal (inch):</label>
+      <input type="number" id="diagonal" step="0.1" value="14" class="form-control" oninput="drawChessboard()">
     </div>
     <div class="me-2">
-      <label for="columns" class="form-label">Horizontal mesh size
-        :</label>
-      <input type="number" id="columns" value="12"
-             class="form-control" oninput="drawChessboard()">
+      <label for="columns" class="form-label">Horizontal mesh size :</label>
+      <input type="number" id="columns" value="12" class="form-control" oninput="drawChessboard()">
     </div>
     <div class="me-2">
-      <label for="rows" class="form-label">Vertical mesh
-        size:</label>
-      <input type="number" id="rows" value="9"
-             class="form-control" oninput="drawChessboard()">
+      <label for="rows" class="form-label">Vertical mesh size:</label>
+      <input type="number" id="rows" value="9" class="form-control" oninput="drawChessboard()">
     </div>
     <div class="me-2">
-      <label for="squareSize" class="form-label">Square size(mm)
-        :</label>
-      <input type="number" id="squareSize" value="10" class="form-control"
-             oninput="drawChessboard()">
+      <label for="squareSize" class="form-label">Square size(mm) :</label>
+      <input type="number" id="squareSize" value="10" class="form-control" oninput="drawChessboard()">
     </div>
     <div class="me-2">
-      <label for="clientResolution" class="form-label">
-        Your Resolution(px):</label>
-      <input type="text" id="clientResolution" disabled value="0"
-             class="form-control">
+      <label for="clientResolution" class="form-label">Your Resolution(px):</label>
+      <input type="text" id="clientResolution" disabled value="0" class="form-control">
     </div>
   </div>
 </div>
 
 <div class="center-content" style="padding-top: 70px;">
   <div id="chessboard"></div>
+  <p id="label" class="text-center mt-3 text-secondary" style="font-size: 4rem;"></p> <!--
+   Текстовое поле для отображения размера -->
 </div>
 
 <!-- Подключение Bootstrap JS -->

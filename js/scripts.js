@@ -13,9 +13,7 @@ function drawChessboard() {
     const squareSizeInPixels = (squareSize / 25.4) * PPI; // 25.4 мм в одном дюйме
 
     const clientResolution = document.getElementById('clientResolution');
-
-    clientResolution.value = resolutionWidth + " x " + resolutionHeight
-
+    clientResolution.value = resolutionWidth + " x " + resolutionHeight;
 
     // Отрисовка шахматной доски
     const chessboard = document.getElementById('chessboard');
@@ -31,17 +29,16 @@ function drawChessboard() {
             chessboard.appendChild(square);
         }
     }
+
+    // Добавление текста под доской
+    const label = document.getElementById('label');
+    label.innerText = `${columns}W x ${rows}H * ${squareSize} mm Squares`;
 }
 
 function toggleControls() {
     const controls = document.getElementById('controls');
-    if (controls.classList.contains('d-none')) {
-        controls.classList.remove('d-none');
-        controls.classList.add('d-flex');
-    } else {
-        controls.classList.remove('d-flex');
-        controls.classList.add('d-none');
-    }
+    controls.classList.toggle('d-none');
+    controls.classList.toggle('d-flex');
 }
 
 // Добавление слушателя событий после загрузки DOM
